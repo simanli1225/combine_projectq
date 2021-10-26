@@ -1,121 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
-  <html lang="zh">
-    <head>
-      <meta charset="UTF-8" />
-      <meta
-        name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
-      />
-      <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-      <title>Project Q</title>
-      <script src="./pageControl.js"></script>
-      <script src="./header_jump.js"></script>
-      <link
-        rel="stylesheet"
-        href="https://unpkg.com/animate.css@3.5.2/animate.min.css"
-      />
-      <link rel="stylesheet" href="style/style.css" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Project Q</title>
+    <script src="./pageControl.js"></script>
+    <script src="./header_jump.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/animate.css@3.5.2/animate.min.css"
+    />
+    <link rel="stylesheet" href="style/style.css" />
+    <!-- face music libs start here -->
 
-      <style>
-        .animated {
-          animate-delay: 0;
-        }
-        #app {
-          position: fixed;
-          /* width: 90vw; */
-          /* height: 90vh; */
-          /* margin: 200px auto; */
-        }
-      </style>
-    </head>
-    <body>
-      <div id="app">
-        <button id="test">测试</button>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils@0.6/control_utils.css"
+      crossorigin="anonymous"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.7.0/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-wasm@2.7.0/dist/tf-backend-wasm.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/facemesh@0.0.5/dist/facemesh.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.6/dat.gui.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.3/camera_utils.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils@0.6/control_utils.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils@0.3/drawing_utils.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh@0.4/face_mesh.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils@0.1/drawing_utils.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/holistic@0.1/holistic.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="js/M1SpatialAudioPlayer.js"></script>
+    <!-- Loading / Progress Bar -->
+    <link rel="preload" href="img/spinner.svg" as="image" />
+    <script src="js/bose-ar-web-sdk.min.js"></script>
+    <script src="js/three.js/libs/stats.min.js"></script>
+    <script src="js/three.js/loaders/GLTFLoader.js"></script>
+    <script src="js/three.js/postprocessing/EffectComposer.js"></script>
+    <script src="js/three.js/postprocessing/RenderPass.js"></script>
+    <script src="js/three.js/postprocessing/ShaderPass.js"></script>
+    <script src="js/three.js/shaders/CopyShader.js"></script>
+
+    <script src="js/osc.min.js"></script>
+    <script src="js/1euro.js"></script>
+    <script src="js/Gimbal.js"></script>
+    <script src="js/triangle.js"></script>
+
+    <script src="js/Mach1SoundPlayer.js"></script>
+    <script src="js/Mach1Decode.js"></script>
+    <!-- face music libs end here -->
+
+    <style>
+      .animated {
+        animate-delay: 0;
+      }
+      #app {
+        position: fixed;
+        /* width: 90vw; */
+        /* height: 90vh; */
+        /* margin: 200px auto; */
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <button id="test">测试</button>
+    </div>
+    <div class="legal">
+      <div id="legal_top">
+        <img id="icon_logo" src="resources/logo.svg" />
       </div>
-      <div class="legal">
-        <div id="legal_top">
-          <img id="icon_logo" src="resources/logo.svg" />
+      <div id="legal_bottom">
+        <div class="legal_bottom_cl" id="legal_bottom_left">
+          <p id="legal-item_id_1" class="legal-item clickable">
+            <a href="https://www.squarespace.com/privacy" target="_blank"
+              >PRIVACY POLICY</a
+            >
+          </p>
+          <p id="legal-item_id_2" class="legal-item clickable">
+            <a
+              href="https://www.squarespace.com/terms-of-service"
+              target="_blank"
+              >TERMS OF SERVICE</a
+            >
+          </p>
         </div>
-        <div id="legal_bottom">
-          <div class="legal_bottom_cl" id="legal_bottom_left">
-            <p id="legal-item_id_1" class="legal-item clickable">
-              <a href="https://www.squarespace.com/privacy" target="_blank"
-                >PRIVACY POLICY</a
-              >
-            </p>
-            <p id="legal-item_id_2" class="legal-item clickable">
-              <a
-                href="https://www.squarespace.com/terms-of-service"
-                target="_blank"
-                >TERMS OF SERVICE</a
-              >
-            </p>
-          </div>
-          <div class="legal_bottom_cl" id="legal_bottom_right">
-            <img
+        <div class="legal_bottom_cl" id="legal_bottom_right">
+          <img
+            class="legal-item clickable"
+            id="legal-item_id_sound"
+            src="resources/sound.svg"
+            alt=""
+          />
+          <a href="https://www.squarespace.com/"
+            ><img
               class="legal-item clickable"
-              id="legal-item_id_sound"
-              src="resources/sound.svg"
+              id="legal-item_id_sqlogo"
+              src="resources/sq_logo.svg"
               alt=""
-            />
-            <a href="https://www.squarespace.com/"
-              ><img
-                class="legal-item clickable"
-                id="legal-item_id_sqlogo"
-                src="resources/sq_logo.svg"
-                alt=""
-            /></a>
-          </div>
+          /></a>
         </div>
       </div>
-    </body>
-    <script>
-      let listenButton;
-      let infoButton;
-      let closeInfoButton;
+    </div>
+  </body>
+  <script>
+    let listenButton;
+    let infoButton;
+    let closeInfoButton;
 
-      let render = new Render({
-        baseURI: "./template",
+    let renderPage = new Render({
+      baseURI: "./template",
+    });
+    // main page
+    renderPage
+      .create("main", document.getElementById("app"), {
+        animate: "fadeIn",
+        mode: "load",
+        load: "loadIndex",
+      })
+      .then((res) => {
+        this.loadIndex("add");
+        infoButton = document.getElementsByClassName("info_icon_cl")[0];
+        listenButton = document.getElementsByClassName("listen_icon_cl")[0];
       });
-      // main page
-      render
-        .create("main", document.getElementById("app"), {
-          animate: "fadeIn",
-          mode: "load",
-          load: "loadIndex",
-        })
-        .then((res) => {
-          this.loadIndex("add");
-          infoButton = document.getElementsByClassName("info_icon_cl")[0];
-          //   console.log(infoButton);
-          //  = document.getElementById("main_info_icon");
-          //   listenButton = document.getElementById("main_listen_icon");
-        });
 
-      // info page
-      let test = document.getElementById("test");
-      render
-        .create("info", document.getElementById("app"), {
-          animate: "fadeIn",
-          mode: "load",
-          load: "loadInfo",
-        })
-        .then((res) => {
-          // console.log(res);
-          // loadInfo('add');
-          infoButton.onclick = () => {
-            this.loadInfo("cover");
-            closeInfoButton = document.getElementById(
-              "info-big-screen-close-id"
-            );
+    // info page
+    renderPage
+      .create("info", document.getElementById("app"), {
+        animate: "fadeIn",
+        mode: "load",
+        load: "loadInfo",
+      })
+      .then((res) => {
+        infoButton.onclick = () => {
+          this.loadInfo("cover");
+          closeInfoButton = document.getElementById("info-big-screen-close-id");
+          console.log(closeInfoButton);
+          closeInfoButton.onclick = () => {
             console.log(closeInfoButton);
-            closeInfoButton.onclick = () => {
-              console.log(closeInfoButton);
-              loadIndex("cover");
-            };
+            loadIndex("cover");
           };
-        });
-    </script>
-  </html>
+        };
+      });
+
+    //    music page
+    renderPage
+      .create("music", document.getElementById("app"), {
+        animate: "fadeIn",
+        mode: "load",
+        load: "loadMusicPage",
+      })
+      .then((res) => {
+        listenButton.onclick = () => {
+          this.loadMusicPage("cover");
+        };
+      });
+  </script>
 </html>
