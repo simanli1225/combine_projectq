@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <html lang="zh">
+    <head>
+      <meta charset="UTF-8" />
+      <meta
+        name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+      />
+      <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+      <title>Project Q</title>
+      <script src="./pageControl.js"></script>
+      <script src="./header_jump.js"></script>
+      <link
+        rel="stylesheet"
+        href="https://unpkg.com/animate.css@3.5.2/animate.min.css"
+      />
+      <link rel="stylesheet" href="style/style.css" />
+
+      <style>
+        .animated {
+          animate-delay: 0;
+        }
+        #app {
+          position: fixed;
+          /* width: 90vw; */
+          /* height: 90vh; */
+          /* margin: 200px auto; */
+        }
+      </style>
+    </head>
+    <body>
+      <div id="app">
+        <button id="test">测试</button>
+      </div>
+      <div class="legal">
+        <div id="legal_top">
+          <img id="icon_logo" src="resources/logo.svg" />
+        </div>
+        <div id="legal_bottom">
+          <div class="legal_bottom_cl" id="legal_bottom_left">
+            <p id="legal-item_id_1" class="legal-item clickable">
+              <a href="https://www.squarespace.com/privacy" target="_blank"
+                >PRIVACY POLICY</a
+              >
+            </p>
+            <p id="legal-item_id_2" class="legal-item clickable">
+              <a
+                href="https://www.squarespace.com/terms-of-service"
+                target="_blank"
+                >TERMS OF SERVICE</a
+              >
+            </p>
+          </div>
+          <div class="legal_bottom_cl" id="legal_bottom_right">
+            <img
+              class="legal-item clickable"
+              id="legal-item_id_sound"
+              src="resources/sound.svg"
+              alt=""
+            />
+            <a href="https://www.squarespace.com/"
+              ><img
+                class="legal-item clickable"
+                id="legal-item_id_sqlogo"
+                src="resources/sq_logo.svg"
+                alt=""
+            /></a>
+          </div>
+        </div>
+      </div>
+    </body>
+    <script>
+      let listenButton;
+      let infoButton;
+      let closeInfoButton;
+
+      let render = new Render({
+        baseURI: "./template",
+      });
+      // main page
+      render
+        .create("main", document.getElementById("app"), {
+          animate: "fadeIn",
+          mode: "load",
+          load: "loadIndex",
+        })
+        .then((res) => {
+          this.loadIndex("add");
+          infoButton = document.getElementsByClassName("info_icon_cl")[0];
+          //   console.log(infoButton);
+          //  = document.getElementById("main_info_icon");
+          //   listenButton = document.getElementById("main_listen_icon");
+        });
+
+      // info page
+      let test = document.getElementById("test");
+      render
+        .create("info", document.getElementById("app"), {
+          animate: "fadeIn",
+          mode: "load",
+          load: "loadInfo",
+        })
+        .then((res) => {
+          // console.log(res);
+          // loadInfo('add');
+          infoButton.onclick = () => {
+            this.loadInfo("cover");
+            closeInfoButton = document.getElementById(
+              "info-big-screen-close-id"
+            );
+            console.log(closeInfoButton);
+            closeInfoButton.onclick = () => {
+              console.log(closeInfoButton);
+              loadIndex("cover");
+            };
+          };
+        });
+    </script>
+  </html>
+</html>
