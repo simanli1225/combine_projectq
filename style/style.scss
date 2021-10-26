@@ -72,9 +72,9 @@ body {
   background-color: black;
   margin: 0;
 }
-.body_cl{
-  width:100vw;
-  height:100vh;
+.body_cl {
+  width: 100vw;
+  height: 100vh;
   background-color: black;
   margin: 0;
 }
@@ -105,6 +105,14 @@ body {
   position: fixed;
   top: $legal-padding-l;
   width: 100%;
+}
+.legal_info_icon {
+  position: fixed;
+  color: white;
+  font-size: 15px;
+  font-family: suisse_med;
+  right: $legal-padding-s-lr;
+  top: $legal-padding-l;
 }
 #icon_logo {
   display: block;
@@ -338,12 +346,18 @@ a {
   #legal_top {
     top: $ms-legal-padding-l;
   }
+  .legal_info_icon {
+    top: $ms-legal-padding-l;
+  }
   #legal_bottom {
     bottom: $ms-legal-padding-l;
     padding-left: $ms-legal-padding-s-lr;
   }
   .legal-item {
     padding-left: $ms-legal-padding-items;
+  }
+  .legal_info_icon {
+    right: $ms-legal-padding-s-lr;
   }
   #legal_bottom_right {
     padding-right: $ms-legal-padding-s-lr;

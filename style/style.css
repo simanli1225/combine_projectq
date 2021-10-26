@@ -57,6 +57,15 @@ body {
   width: 100%;
 }
 
+.legal_info_icon {
+  position: fixed;
+  color: white;
+  font-size: 15px;
+  font-family: suisse_med;
+  right: 6.5vw;
+  top: 35px;
+}
+
 #icon_logo {
   display: block;
   margin: auto;
@@ -333,12 +342,18 @@ a {
   #legal_top {
     top: 35px;
   }
+  .legal_info_icon {
+    top: 35px;
+  }
   #legal_bottom {
     bottom: 35px;
     padding-left: 3vw;
   }
   .legal-item {
     padding-left: 12px;
+  }
+  .legal_info_icon {
+    right: 3vw;
   }
   #legal_bottom_right {
     padding-right: 3vw;
